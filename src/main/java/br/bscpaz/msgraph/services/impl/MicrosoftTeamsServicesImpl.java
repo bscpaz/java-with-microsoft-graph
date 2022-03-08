@@ -126,18 +126,18 @@ public class MicrosoftTeamsServicesImpl implements MicrosoftTeamServices {
 		
 		//Atualização do motivo do cancelamento.
 		Event compromissoCancelado = new Event();
-        ItemBody body = new ItemBody();
-        body.contentType = BodyType.HTML;
-        body.content = audiencia.getObservacao();
-        compromissoCancelado.body = body;
+		ItemBody body = new ItemBody();
+		body.contentType = BodyType.HTML;
+		body.content = audiencia.getObservacao();
+		compromissoCancelado.body = body;
 		
-        try {
-        	//Atualiza o motivo do cancelamento.
-        	graphClient.me().events(audiencia.getChaveCalendarioApoio()).buildRequest().patch(compromissoCancelado);
+		try {
+			//Atualiza o motivo do cancelamento.
+			graphClient.me().events(audiencia.getChaveCalendarioApoio()).buildRequest().patch(compromissoCancelado);
         	
-        	//Após a inclusão da informação de cancelamento, efetiva o cancelamento.
-        	graphClient.me().events(audiencia.getChaveCalendarioApoio()).buildRequest(requestOptions).delete();
-        	retorno.setSucesso(true);
+			//Após a inclusão da informação de cancelamento, efetiva o cancelamento.
+			graphClient.me().events(audiencia.getChaveCalendarioApoio()).buildRequest(requestOptions).delete();
+			retorno.setSucesso(true);
         	
 		} catch (Exception e) {
 			e.printStackTrace();
